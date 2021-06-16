@@ -31,7 +31,7 @@ client.once('ready', async () => {
 	            url: 'https://jogjagamers.org'
 	        }
 	    });
-	}, 60000);
+	}, 10000);
     console.log('Bot is ready!');
 });
 
