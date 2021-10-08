@@ -1,7 +1,7 @@
 
 {
 	"prefix": "$",
-	"token": "${{ secrets.YOUR_TOKEN }}",
+	"token": "NjQwMjk2NTAyOTQ1Nzc1NjY5.Xb3wlg.3P4w3ac7lRg0FT0FnrulCySN6vg",
 	"serverip": "139.99.125.54",
 	"port": "7777"
 }
