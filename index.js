@@ -1,8 +1,8 @@
 const fs = require('fs');
 const Discord = require('discord.js');
-const { prefix, token } = require('./config.json');
+const { prefix, token, serverip, port } = require('./config.json');
 const fetch = require('node-fetch');
-
+const samp = require("samp-query");
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
 
@@ -14,26 +14,32 @@ for (const file of commandFiles) {
 	// with the key as the command name and the value as the exported module
 	client.commands.set(command.name, command);
 }
+//function
+function Status()
+{
+	var settings = {
+		host: serverip,
+		port: port,
+	};
+    samp(settings, function(error, response){
+        if(error)
+        {
+			console.log("Server Offline")
+			console.log(error)
+        }
+        else
+        {
+            status = `${response["online"]}/${response["maxplayers"]} Players`;
+            client.user.setActivity(status, {type: `PLAYING`});
+        }
+    })
+}
 
 client.once('ready', async () => {
-	// refresh every menute
-	setInterval(async function(){ 
-		const jgrp = await fetch('https://monitor.teamshrimp.com/api/fetch/all/139.99.125.54/7777/').then(response => response.json());
-	    const servername = jgrp.servername;
-	    const mode = jgrp.gametype;
-	    const players = jgrp.num_players+'/'+jgrp.max_players;
-
-	    client.user.setPresence({
-	        status: 'available',
-	        activity: {
-	            name: servername + ' | ' + players + ' | '+ mode +' | '+ 'Type $help',
-	            type: 'PLAYING',
-	            url: 'https://jogjagamers.org'
-	        }
-	    });
-	}, 10000);
+	//Interval
+	Status();setInterval(Status, 10000)
     console.log('Bot is ready!');
-});
+})
 
 client.login(token);
 
