@@ -1,7 +1,6 @@
-
 {
-	"prefix": "$",
-	"token": "Token here",
-	"serverip": "139.99.125.54",
-	"port": "7777"
+    "prefix": "$",
+    "token": "your_token_here",
+    "serverip": "139.99.125.54",
+    "port": "7777"
 }
